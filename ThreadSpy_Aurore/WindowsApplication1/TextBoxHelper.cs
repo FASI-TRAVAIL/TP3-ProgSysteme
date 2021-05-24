@@ -10,6 +10,8 @@ namespace ThreadSpy
         static private TextBox textbox;
         public delegate void UpdateTextCallback(char c);
 
+        static private int nbr = 0;
+
         // 
 
         /// <summary>
@@ -17,15 +19,17 @@ namespace ThreadSpy
         /// </summary>
         /// <param name="tb"></param> The TextBox where the char will be added
         /// <param name="c"></param> The char to add
-        static public void AddChar(TextBox tb, char c)
+        static public void AddChar(TextBox tb, char c, int n)
         {
             textbox = tb;
+            nbr = n;
             textbox.Invoke(new UpdateTextCallback(AddCharSave), c);
         }
 
         static private void AddCharSave(char c)
         {
             textbox.Text += c;
+            Console.WriteLine(nbr);
         }
     }
 }

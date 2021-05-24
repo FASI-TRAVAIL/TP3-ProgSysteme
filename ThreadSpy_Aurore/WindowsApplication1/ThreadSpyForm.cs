@@ -27,6 +27,8 @@ namespace ThreadSpy
 
         private int threadCount = 0;
 
+        private int NrOfChar = 0;
+
         public ThreadSpyForm()
         {
             InitializeComponent();
@@ -47,12 +49,11 @@ namespace ThreadSpy
         {
             if (obj != null)
             {
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < threadCount; i++)
                 {
-                    Thread.Sleep(30);
-                    TextBoxHelper.AddChar(tb, (char) obj);
-                    //tb.Text += c;
-                    //Console.WriteLine(threadCount);
+                    Thread.Sleep(500);
+                    
+                    TextBoxHelper.AddChar(tb, (char)obj, threadCount);
                 }
             }
         }
@@ -79,10 +80,10 @@ namespace ThreadSpy
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (threadCount <= max && threadCount>0)
+            if (threadCount <= max && threadCount > 0)
             {
                 if (threads[0] != null)
-                    this.TextBoxStatus.Text = threads[threadCount-1].ThreadState.ToString();
+                    this.TextBoxStatus.Text = threads[threadCount - 1].ThreadState.ToString();
             }
         }
         
