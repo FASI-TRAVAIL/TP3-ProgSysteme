@@ -10,13 +10,11 @@ namespace ThreadSpy
     {
         private TextBox tb;
         private char c;
-        private int n;
 
-        public DrawingRunnable(TextBox tb, char c, int n)
+        public DrawingRunnable(TextBox tb, char c)
         {
             this.tb = tb;
             this.c = c;
-            this.n = n;
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace ThreadSpy
             for (int i = 0; i < 20; i++)
             {
                 Thread.Sleep(300);
-                TextBoxHelper.AddChar(tb, c, n);
+                TextBoxHelper.AddChar(tb, c);
              }
         }
     }

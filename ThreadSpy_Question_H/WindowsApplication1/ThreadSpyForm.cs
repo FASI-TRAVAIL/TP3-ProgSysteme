@@ -13,6 +13,8 @@ namespace ThreadSpy
     {
         private TextBox tb;
 
+        private int NrOfChars = 1;
+
         private int max = 26;
 
         private Thread [] threads;
@@ -26,8 +28,6 @@ namespace ThreadSpy
         };
 
         private int threadCount = 0;
-
-        private int NrOfChar = 0;
 
         public ThreadSpyForm()
         {
@@ -49,12 +49,14 @@ namespace ThreadSpy
         {
             if (obj != null)
             {
-                for (int i = 0; i < threadCount; i++)
+                for (int i = 0; i < NrOfChars; i++)
                 {
-                    Thread.Sleep(500);
-                    
-                    TextBoxHelper.AddChar(tb, (char)obj, threadCount);
+                    Thread.Sleep(300);
+                    TextBoxHelper.AddChar(tb, (char) obj);
+                    //tb.Text += c;
+                    //Console.WriteLine(threadCount);
                 }
+                NrOfChars++;
             }
         }
 
@@ -80,10 +82,13 @@ namespace ThreadSpy
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (threadCount <= max && threadCount > 0)
+            if (threadCount <= max )
             {
-                if (threads[0] != null)
-                    this.TextBoxStatus.Text = threads[threadCount - 1].ThreadState.ToString();
+                if(threadCount==0)
+                   this.TextBoxStatus.Text = threads[threadCount].ThreadState.ToString();
+                else
+                   this.TextBoxStatus.Text = threads[threadCount-1].ThreadState.ToString();
+                // threadCount++;
             }
         }
         
